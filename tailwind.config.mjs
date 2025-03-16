@@ -5,17 +5,17 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        display: ['"Permanent Marker"', 'cursive'],
+        sans: ['Inter', 'sans-serif']
       },
       colors: {
         club: {
           primary: '#1A1A1A',
           secondary: '#9A8C78',
-          accent: '#C4B19B',
-        },
-      },
-    },
+          accent: '#C4B19B'
+        }
+      }
+    }
   },
-  plugins: [],
-};
+  plugins: []
+}
