@@ -1,0 +1,263 @@
+---
+import 'photoswipe/style.css';
+
+const images = [
+  {
+    src: "gallery/a1-13.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-32.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-37.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-49.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-56.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-57.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-62.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-80.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-123.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-135.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-169.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  },
+  {
+    src: "gallery/a1-174.jpg",
+    alt: "Playground 710",
+    title: "Playground 710",
+    description: ""
+  } 
+];
+
+const videos = [
+  {
+    id: "9oXBoTJ4GXs",
+    title: "Lo Más Destacado de la Gala Anual",
+  },
+  {
+    id: "9oXBoTJ4GXs",
+    title: "Recorrido por las Instalaciones",
+  },
+  {
+    id: "9oXBoTJ4GXs",
+    title: "Testimonios de Miembros",
+  }
+];
+---
+
+<section id="gallery" class="py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="font-display text-4xl md:text-5xl text-center mb-12" data-aos="fade-up">
+      Conoce el club
+    </h2>
+
+    <!-- Image Gallery -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      {images.map((image) => (
+        <a
+          href={`${image.src}?auto=format&fit=crop&w=1600`}
+          data-pswp-width="1600"
+          data-pswp-height="1067"
+          class="gallery-item"
+          data-aos="fade-up"
+          data-title={image.title}
+          data-description={image.description}
+        >
+          <img
+            src={`${image.src}?auto=format&fit=crop&w=600`}
+            alt={image.alt}
+            class="w-full h-72 object-cover rounded-lg transition-transform hover:scale-105"
+            loading="lazy"
+          />
+        </a>
+      ))}
+    </div>
+
+    <!-- Video Gallery -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {videos.map((video) => (
+        <div class="aspect-video" data-aos="fade-up">
+          <iframe
+            src={`https://www.youtube.com/embed/${video.id}`}
+            title={video.title}
+            class="w-full h-full rounded-lg"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import PhotoSwipe from 'photoswipe';
+
+  // Initialize PhotoSwipe with enhanced options
+  const initPhotoSwipe = (galleryElement: Element) => {
+    const options = {
+      gallery: galleryElement,
+      children: 'a',
+      pswpModule: PhotoSwipe,
+      wheelToZoom: true,
+      closeOnVerticalDrag: true,
+      arrowKeys: true,
+      history: false,
+      errorMsg: 'La imagen no se pudo cargar.',
+      
+      // Customize UI elements text
+      uiElements: [
+        {
+          name: 'close',
+          title: 'Cerrar (Esc)',
+        },
+        {
+          name: 'zoomIn',
+          title: 'Acercar',
+        },
+        {
+          name: 'zoomOut',
+          title: 'Alejar',
+        },
+        {
+          name: 'previous',
+          title: 'Anterior',
+        },
+        {
+          name: 'next',
+          title: 'Siguiente',
+        },
+      ],
+    };
+
+    const pswp = new PhotoSwipe(options);
+
+    // Add custom UI elements
+    pswp.on('uiRegister', () => {
+      pswp.ui.registerElement({
+        name: 'custom-caption',
+        order: 9,
+        isButton: false,
+        appendTo: 'root',
+        html: 'Caption text',
+        onInit: (el: HTMLElement) => {
+          pswp.on('change', () => {
+            const currSlideElement = pswp.currSlide.data.element;
+            let captionHTML = '';
+            
+            if (currSlideElement) {
+              const title = currSlideElement.getAttribute('data-title');
+              const description = currSlideElement.getAttribute('data-description');
+              
+              if (title) {
+                captionHTML += `<h3 class="pswp__caption-title">${title}</h3>`;
+              }
+              if (description) {
+                captionHTML += `<p class="pswp__caption-desc">${description}</p>`;
+              }
+            }
+            
+            el.innerHTML = captionHTML;
+          });
+        }
+      });
+    });
+
+    return pswp;
+  };
+
+  // Gallery element and PhotoSwipe instance
+  const gallery = document.querySelector('.grid');
+  let pswp: PhotoSwipe | null = null;
+
+  // Initialize gallery click handling
+  gallery?.addEventListener('click', (e) => {
+    e.preventDefault();
+    
+    const target = e.target.closest('a');
+    if (!target) return;
+
+    if (!pswp) {
+      pswp = initPhotoSwipe(gallery);
+    }
+    
+    pswp.init();
+  });
+</script>
+
+<style>
+  .pswp__caption-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .pswp__caption-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .pswp__button--close {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-radius: 50%;
+    margin: 1rem !important;
+  }
+
+  .pswp__button--arrow--prev,
+  .pswp__button--arrow--next {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+  }
+</style>

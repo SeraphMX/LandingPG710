@@ -1,0 +1,49 @@
+---
+const benefits = [
+  {
+    title: "Consumo seguro",
+    description: "Nuestro spot es 420/710 friendly, aquí podrás consumir sin ningún problema tus extractos y flores favoritas en una habitación diseñada especialmente para ello."
+  },
+  {
+    title: "Aprende con nosotros",
+    description: "Nuestro equipo siempre esta dispuesto a resolver cualquier duda que tengas de nuestros productos, además organizamos cursos especiales para miembros."
+  },
+  {
+    title: "Variedad de productos",
+    description: "Tenemos productos de todo tipo para que disfrutes de tus momentos favoritos con estilo, vaporizadores , accesorios, parafernalia y mucho más."
+  },
+  {
+    title: "Asesoría legal",
+    description: "Nuestros miembros obtienen asesoría legal y apoyo para la obtención de autorizaciones para consumo, cultivo y portación de cannabis, semillas y concentrados."
+  }
+];
+---
+
+<section id="about" class="py-20 px-5 bg-gray-50 dark:bg-club-primary/50">
+  <div class="container mx-auto px-4">
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6" data-aos="fade-right">
+          <h2 class="font-display text-4xl md:text-5xl mb-6">Playground 710</h2>
+        <p class="text-gray-600 dark:text-gray-300 text-lg">
+        Somos un club social ubicado en el corazón de la ciudad de México, el acceso es con membresía exclusivamente. Contamos con una amplia variedad de  productos, personal capacitado y un espacio seguro para el disfrute y aprendizaje de la cultura cannábica
+        </p>        
+        <p class="text-gray-600 dark:text-gray-300 text-lg">
+         Un espacio donde puedes aprender y al mismo tiempo relajarte, donde podrás compartir el gusto por tus flores y extractos favoritos y ejecutar a pleno tus derechos de libre desarrollo de la personalidad. Nuestros miembros gozan de una excelente atención y beneficios exclusivos que hacen de nuestro club un lugar especial y único en la ciudad. 
+        </p>        
+       
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-aos="fade-left">
+        {benefits.map((benefit) => (
+          <div class="bg-white dark:bg-club-primary p-6 rounded-lg shadow-lg">
+            <h4 class="font-display text-xl mb-3">{benefit.title}</h4>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">
+              {benefit.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

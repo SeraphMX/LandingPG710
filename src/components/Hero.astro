@@ -1,0 +1,70 @@
+---
+---
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- Hero Background with Parallax -->
+  <div class="absolute inset-0 z-0">
+    <div class="parallax-container w-full h-[100vh] relative">
+      <img
+        src="/hero/bg-hero-color.webp"
+        alt="Interior elegante del club"
+        class="w-full h-full object-cover absolute top-0 left-0"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-black/10"></div>
+    </div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 text-center text-white px-10 w-full max-w-4xl mx-auto pt-10" data-aos="fade-up">
+   
+    <img src="/branding/logo-black.svg" class="w-full md:w-1/2 h-auto mx-auto" alt="">
+
+    
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg
+      class="w-6 h-6 text-black"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .parallax-container {
+    will-change: transform;
+  }
+</style>
+
+<script>
+  let ticking = false;
+  const parallaxContainer = document.querySelector('.parallax-container');
+
+  function updateParallax(scrollPos: number) {
+    if (parallaxContainer) {
+      const translateY = scrollPos * 0.5;
+      parallaxContainer.style.transform = `translate3d(0, ${translateY}px, 0)`;
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY;
+    
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        updateParallax(scrollPos);
+        ticking = false;
+      });
+      
+      ticking = true;
+    }
+  });
+</script>
