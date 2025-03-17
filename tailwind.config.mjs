@@ -12,7 +12,7 @@ export default {
         club: {
           primary: '#1A1A1A',
           secondary: '#9A8C78',
-          accent: '#C4B19B'
+          accent: '#e5c02e'
         }
       }
     }

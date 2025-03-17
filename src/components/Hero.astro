@@ -1,9 +1,9 @@
 ---
 ---
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<section class="relative h-[100vh] flex items-center justify-center overflow-hidden">
   <!-- Hero Background with Parallax -->
-  <div class="absolute inset-0 z-0" data-aos="fade-in">
-    <div class="parallax-container w-full h-[100vh] relative">
+  <div class="absolute inset-0 z-0">
+    <div class="parallax-container w-full h-full relative">
       <img
         src="/hero/bg-hero-color.webp"
         alt="Interior elegante del club"
@@ -15,11 +15,8 @@
   </div>
 
   <!-- Hero Content -->
-  <div class="relative z-10 text-center text-white px-10 w-full max-w-4xl mx-auto pt-10" data-aos="fade-up">
-   
+  <div class="relative z-10 text-center text-white px-10 w-full max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
     <img src="/branding/logo-black.svg" class="w-full md:w-1/2 h-auto mx-auto" alt="">
-
-    
   </div>
 
   <!-- Scroll Indicator -->
@@ -41,6 +38,7 @@
 <style>
   .parallax-container {
     will-change: transform;
+    transform: translateZ(0);
   }
 </style>
 
@@ -65,6 +63,14 @@
       });
       
       ticking = true;
+    }
+  });
+
+  // Asegurar que AOS se inicialice después de que el contenido esté cargado
+  document.addEventListener('DOMContentLoaded', () => {
+    const heroContent = document.querySelector('[data-aos]');
+    if (heroContent) {
+      heroContent.classList.add('aos-animate');
     }
   });
 </script>

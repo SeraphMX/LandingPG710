@@ -38,7 +38,7 @@ const {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content="/og-image.jpg" />
   </head>
-  <body class="bg-white dark:bg-club-primary text-club-primary dark:text-white bg-[url(/bgFooterFull.jpg)] bg-no-repeat bg-bottom " >
+  <body class="bg-white dark:bg-club-primary text-club-primary dark:text-white bg-[url(/bgFooterFull.jpg)] bg-no-repeat bg-bottom  min-h-screen" >
     <slot />
     <script>
       import AOS from 'aos';
@@ -53,6 +53,12 @@ const {
 <style is:global>
   html {
     font-family: 'Inter', system-ui, sans-serif;
+  }
+
+   body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
   
   .fade-in {
